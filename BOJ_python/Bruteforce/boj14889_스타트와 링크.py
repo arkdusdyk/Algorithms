@@ -34,5 +34,5 @@ for i in range(len(comb)//2):
 print(answer)
 '''
 Difficulty : S3
-여러가지 방법이 있겠지만 가장 먼저 생각이 든 조합, bruteforce (n : max 20)로 해결
+여러가지 방법이 있겠지만 가장 먼저 생각이 든 조합 + bruteforce (n : max 20)로 해결
 '''
