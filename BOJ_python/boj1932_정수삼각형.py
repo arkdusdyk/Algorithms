@@ -12,5 +12,5 @@ for i in range(1,n):
 		dp[i][j] = max(dp[i-1][j],dp[i-1][j-1]) + dp[i][j]
 '''
 Difficulty : S1
-dp[i][j] = max(dp[i-1][j], dp[i-1][j-1]) + dp[i][j]
+전 줄 저장 + 현재 줄 확인 max => 갱신
 '''
