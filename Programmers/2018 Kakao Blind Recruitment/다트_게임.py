@@ -20,5 +20,5 @@ def solution(dartResult):
     return answer
 
 
-# 2018 카카오 Blind Recruitment
+# 2018 카카오 Blind Recruitment Level1
 # 문자열 구현 문제

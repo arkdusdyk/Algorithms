@@ -27,6 +27,6 @@ def solution(new_id):
 new_id = '...!@BaT#*..y.abcdefghijklm'
 print(solution(new_id))
 
-# 2021 KAKAO BLIND RECRUITMENT
+# 2021 KAKAO BLIND RECRUITMENT Level1
 # 마침 정규 표현식을 공부하고 있었기 때문에 이를 활용해 훨씬 쉽게 구현할 수 있었다. (Step3)
 # 파이썬 기본 제공 라이브러리 (strip(), lower())는 많이 알수록 좋다!

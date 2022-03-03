@@ -9,4 +9,4 @@ def solution(s):
 s = input().rstrip()
 print(solution(s))
 
-# 2020 카카오 BLIND Recruitment (구현)
+# 2020 카카오 BLIND Recruitment (구현) Level1
