@@ -25,4 +25,6 @@ def solution(numbers):
                     answer += 1
     return answer
 
+numbers = "17"
+solution(solution(numbers))
 # 코딩테스트 연습 : 완전탐색 Level 2

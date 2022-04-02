@@ -21,4 +21,6 @@ def solution(answers):
             answer.append(i+1)
     return answer
 
+answers = [1,2,3,4,5]
+print(solution(answers))
 # 코딩테스트 연습 : 완전탐색 Level 1
