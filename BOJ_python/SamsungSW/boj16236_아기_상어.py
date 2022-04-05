@@ -64,3 +64,5 @@ print(time)
 # Difficulty : G3
 # 삼성 SW 역량 테스트 기출 문제집
 # BFS 를 쓰면 좋을 것 같다는 생각. (가까운 먹이부터)
+# Python3 : 32504 KB, 88ms
+# PyPy3 : 127604 KB, 148ms
