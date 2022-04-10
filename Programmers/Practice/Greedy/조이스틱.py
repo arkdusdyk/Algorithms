@@ -9,7 +9,7 @@ def solution(name):
     	if change.count(0) == name_len:
     		break
 
-    	l,r = 
+    	l,r = name
 
     A_cnt = len(name)-name.count('A')
     name_l = list('A' for i in range(len(name)))
