@@ -1,40 +1,27 @@
 def solution(name):
     answer = 0
-    num = list(min(ord("Z")-ord(i)+1,ord(i)-ord("A")) for i in name)
-    cur = 0
-    name_len = len(name)
+    moves = list(min(ord("Z")-ord(i)+1,ord(i)-ord("A")) for i in name)
+    i = 0
     while True:
-    	answer += num[cur]
-    	change[cur] = 0
-    	if change.count(0) == name_len:
-    		break
-
-    	l,r = name
-
-    A_cnt = len(name)-name.count('A')
-    name_l = list('A' for i in range(len(name)))
-    while A_cnt:
-    	answer += min(ord('Z')-ord(name[cur])+1,ord(name[cur])-ord('A'))
-    	name_l[cur] = name[cur]
-    	A_cnt -= 1
-    	if A_cnt == 0:		# no more moves
-    		break
-    	l,r = cur,cur
-    	cnt = 0
-    	while True:
-    		cnt += 1
-    		l = (l-1)%len(name_l)
-    		r = (r+ 1)%len(name_l)
-    		if name[r] != 'A':
-    			cur = r
-    			answer += cnt
-    			break
-    		elif name[l] != 'A':
-    			cur = l
-    			answer += cnt
-    			break
+        answer += moves[i]
+        moves[i] = 0
+        if sum(moves)==0:
+            break
+        l, r = 1,1
+        while moves[i-l] == 0:
+            l += 1
+        while moves[i+r] == 0:
+            r += 1
+        if l < r:
+            answer += l
+            i = (i-l)%len(moves)
+        else:
+            answer += r
+            i = (i+r)%len(moves)
     return answer
 
 name = "JEROEN"
 print(solution(name))
 # 코딩테스트 연습 : Greedy Level 2
+# 해설을 찾아보니, 한쪽으로만 이동하는 것이랑 가다가 돌아와서 거꾸로 이동하는 것만 비교하면 된다고는 하는데,
+# 내가 한 방식이 더 직관적인 것 같다.
