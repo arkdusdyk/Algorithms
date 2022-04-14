@@ -1,8 +1,26 @@
 def solution(name):
-    answer = 0
+    answer = int(1e9)
     moves = list(min(ord("Z")-ord(i)+1,ord(i)-ord("A")) for i in name)
-    i = 0
 
+    def dfs(moves, i, lr, cnt):
+        cnt += lr
+        cnt += moves[i]
+        moves[i] = 0
+        if sum(moves)==0:
+            print(cnt+lr+moves[i])
+            return
+        l,r = 1,1
+        while moves[i-l] == 0:
+            l += 1
+        while moves[i+r] == 0:
+            r += 1
+        tmp = moves[i]
+        dfs(moves, i-l, l, cnt)
+        dfs(moves, i+r, r, cnt)
+        moves[i] -= tmp
+
+
+    dfs(moves, 0, 0, 0)
     return answer
 
 name = "JEROEN"
