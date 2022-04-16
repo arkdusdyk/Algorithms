@@ -1,26 +1,28 @@
 def solution(name):
     answer = int(1e9)
     moves = list(min(ord("Z")-ord(i)+1,ord(i)-ord("A")) for i in name)
-
-    def dfs(moves, i, lr, cnt):
-        cnt += lr
-        cnt += moves[i]
+    m = len(moves)
+    def dfs(moves, i, cnt):
+        nonlocal answer
+        print(i)
+        print(moves)
+        ud = moves[i]
         moves[i] = 0
         if sum(moves)==0:
-            print(cnt+lr+moves[i])
+            print("cnt:", end = ' ')
+            print(cnt + ud)
             return
         l,r = 1,1
-        while moves[i-l] == 0:
+        while moves[(i-l)%m] == 0:
             l += 1
-        while moves[i+r] == 0:
+        while moves[(i+r)%m] == 0:
             r += 1
-        tmp = moves[i]
-        dfs(moves, i-l, l, cnt)
-        dfs(moves, i+r, r, cnt)
-        moves[i] -= tmp
+        dfs(moves, (i-l)%m,cnt+l+ud)
+        moves[i] = ud
+        dfs(moves, (i+r)%m,cnt+r+ud)
 
 
-    dfs(moves, 0, 0, 0)
+    dfs(moves, 0, 0)
     return answer
 
 name = "JEROEN"
