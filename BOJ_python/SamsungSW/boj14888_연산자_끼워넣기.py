@@ -32,3 +32,6 @@ def dfs(result, i):
 dfs(arr[0], 1)
 print(max_ans)
 print(min_ans)
+
+# Difficulty : S1
+# 삼성 SW 역량 테스트 기출 문제집 - DFS
