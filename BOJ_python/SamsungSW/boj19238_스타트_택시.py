@@ -21,44 +21,23 @@ def p_bfs(start_y, start_x):    # to passenger
     q = deque()
     q.append((start_y, start_x, 0))
     visited[start_y][start_x] = True
-    candid = 1e9, 1e9, None
+    candid = []
     while q:
         s_y, s_x, cur = q.popleft()
-        #print("POPPED:", s_y, s_x, cur)
-        #print(q)
         for i in range(4):
             ny = s_y + dy[i]
             nx = s_x + dx[i]
             if (0<=ny<n) and (0<=nx<n):
                 if (visited[ny][nx] == False) and (grid[ny][nx] != 1):
-                    #print(ny, nx, cur+1)
                     if grid[ny][nx] >=2:
-                        if candid[0] > ny:
-                            candid = (ny, nx, cur+1)
-                        if candid[0] == ny and candid[1] > nx:
-                                candid = (ny, nx, cur+1)
+                        candid.append((cur+1, ny,nx))
                     q.append((ny,nx,cur+1))
                     visited[ny][nx] = True
-        if candid[2] != None:
-            break
-    while q:
-        s_y, s_x, cur = q.popleft()
-        #print("POPPED:", s_y, s_x, cur)
-        #print(q)
-        for i in range(4):
-            ny = s_y + dy[i]
-            nx = s_x + dx[i]
-            if (0<=ny<n) and (0<=nx<n):
-                if (visited[ny][nx] == False) and (grid[ny][nx] != 1):
-                    #print(ny, nx, cur+1)
-                    if grid[ny][nx] >=2 and candid[2] >= (cur+1):
-                        if candid[0] > ny:
-                            candid = (ny, nx, cur+1)
-                        if candid[0] == ny and candid[1] > nx:
-                                candid = (ny, nx, cur+1)
-                    q.append((ny,nx,cur+1))
-                    visited[ny][nx] = True
-    return candid
+    if len(candid) == 0:
+        return None, None, None
+    candid = sorted(candid)
+    #print(candid)
+    return candid[0]
 
 def d_bfs(start_y, start_x, dest):  # to destination
     visited = [[False]*n for _ in range(n)]
@@ -76,12 +55,15 @@ def d_bfs(start_y, start_x, dest):  # to destination
                         return (ny, nx, (cur+1))
                     q.append((ny,nx,cur+1))
                     visited[ny][nx] = True
+    return None, None, None
 
 cur_y, cur_x = taxi
 while True:
-    next_y, next_x, dist_p = p_bfs(cur_y, cur_x)
+    dist_p, next_y, next_x = p_bfs(cur_y, cur_x)
     #print("-------------------")
     #print(next_y, next_x, dist_p)
+    if dist_p == None:
+        break
     if dist_p > k:
         break
     passenger = grid[next_y][next_x]
@@ -90,6 +72,8 @@ while True:
     #print(k)
     next_y, next_x, dist_d = d_bfs(next_y, next_x, -passenger)
     #print(next_y, next_x, dist_d)
+    if dist_d == None:
+        break
     if  dist_d > k:
         break
     grid[next_y][next_x] = 0
