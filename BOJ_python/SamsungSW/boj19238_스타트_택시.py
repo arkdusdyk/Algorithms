@@ -18,10 +18,11 @@ dx = [0, 0, -1, 1]
 answer = -1
 def p_bfs(start_y, start_x):    # to passenger
     visited = [[False]*n for _ in range(n)]
+    check = [[INF for _ in range(n) for _]]
     q = deque()
-    q.append((start_y, start_x, 0))
+    q.append((start_y, start_x))
     visited[start_y][start_x] = True
-    candid = []
+
     while q:
         s_y, s_x, cur = q.popleft()
         for i in range(4):
