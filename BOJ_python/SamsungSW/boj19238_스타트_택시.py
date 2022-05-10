@@ -58,6 +58,8 @@ def d_bfs(start_y, start_x, dest):  # to destination
 
 cur_y, cur_x = taxi
 while True:
+    if k <= 0:
+        break
     res = p_bfs(cur_y, cur_x)
     if res == False:
         break
@@ -68,6 +70,8 @@ while True:
     grid[next_y][next_x] = 0
     k -= dist_p
     #print(k)
+    if k <= 0:
+        break
     res = d_bfs(next_y, next_x, -passenger)
     #print(next_y, next_x, dist_d)
     if res == False:
