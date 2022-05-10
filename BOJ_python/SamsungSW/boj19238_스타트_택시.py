@@ -18,26 +18,24 @@ dx = [0, 0, -1, 1]
 answer = -1
 def p_bfs(start_y, start_x):    # to passenger
     visited = [[False]*n for _ in range(n)]
-    check = [[INF for _ in range(n) for _]]
     q = deque()
-    q.append((start_y, start_x))
+    q.append((0, start_y, start_x))
     visited[start_y][start_x] = True
-
+    candid = []
     while q:
-        s_y, s_x, cur = q.popleft()
+        cur, s_y, s_x = q.popleft()
         for i in range(4):
             ny = s_y + dy[i]
             nx = s_x + dx[i]
             if (0<=ny<n) and (0<=nx<n):
                 if (visited[ny][nx] == False) and (grid[ny][nx] != 1):
-                    if grid[ny][nx] >=2:
+                    if grid[ny][nx] >= 2:
                         candid.append((cur+1, ny,nx))
-                    q.append((ny,nx,cur+1))
+                    q.append((cur+1, ny,nx))
                     visited[ny][nx] = True
     if len(candid) == 0:
-        return None, None, None
+        return False
     candid = sorted(candid)
-    #print(candid)
     return candid[0]
 
 def d_bfs(start_y, start_x, dest):  # to destination
@@ -56,25 +54,29 @@ def d_bfs(start_y, start_x, dest):  # to destination
                         return (ny, nx, (cur+1))
                     q.append((ny,nx,cur+1))
                     visited[ny][nx] = True
-    return None, None, None
+    return False
 
 cur_y, cur_x = taxi
 while True:
-    dist_p, next_y, next_x = p_bfs(cur_y, cur_x)
-    #print("-------------------")
-    #print(next_y, next_x, dist_p)
-    if dist_p == None:
+    if k <= 0:
         break
+    res = p_bfs(cur_y, cur_x)
+    if res == False:
+        break
+    dist_p, next_y, next_x = res
     if dist_p > k:
         break
     passenger = grid[next_y][next_x]
     grid[next_y][next_x] = 0
     k -= dist_p
     #print(k)
-    next_y, next_x, dist_d = d_bfs(next_y, next_x, -passenger)
-    #print(next_y, next_x, dist_d)
-    if dist_d == None:
+    if k <= 0:
         break
+    res = d_bfs(next_y, next_x, -passenger)
+    #print(next_y, next_x, dist_d)
+    if res == False:
+        break
+    next_y, next_x, dist_d = res
     if  dist_d > k:
         break
     grid[next_y][next_x] = 0
